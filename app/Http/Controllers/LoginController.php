@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller {
 
@@ -19,12 +20,28 @@ class LoginController extends Controller {
         $username = $requestData['username'];
         $password = $requestData['password'];
 
-        if (isset($username) && isset($password)) {
+        $user = DB::table('users')->where('username', $username)->first();
+
+        if ($user == null) {
+            return new JsonResponse([
+                "message" => 'Login failed',
+                "status" => 401,
+            ], 401);
+        }
+
+        if ($user->password == $password) {
             return new JsonResponse([
                 "message" => 'Login success!',
-                "status" => 200
+                "status" => 200,
+                "username" => $username
             ], 200);
+        } else {
+            return new JsonResponse([
+                "message" => 'Login failed',
+                "status" => 401,
+            ], 401);
         }
+
     }
 
 }
