@@ -28,7 +28,7 @@ class LoginController extends Controller {
             ], 401);
         }
 
-        if ($user->password == $password) {
+        if (password_verify($password, $user->password)) {
             return new JsonResponse([
                 "message" => 'Login success!',
                 "status" => 200,
