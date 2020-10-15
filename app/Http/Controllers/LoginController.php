@@ -16,8 +16,8 @@ class LoginController extends Controller {
      * @return JsonResponse
      */
     public function login(Request $request): JsonResponse {
-        $username = $request->request->get('username');
-        $password = $request->request->get('password');
+        $username = base64_decode($request->request->get('username'));
+        $password = base64_decode($request->request->get('password'));
 
         $user = DB::table('users')->where('username', $username)->first();
 
