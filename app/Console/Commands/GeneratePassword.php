@@ -37,7 +37,7 @@ class GeneratePassword extends Command
      */
     public function handle()
     {
-        $password = password_hash(base64_encode($this->argument('password')), PASSWORD_BCRYPT);
+        $password = password_hash($this->argument('password'), PASSWORD_BCRYPT);
         $this->info('The password to store is: ' . $password);
     }
 }
