@@ -19,8 +19,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'username', 'token',
     ];
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -30,4 +33,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function authenticatePassword(string $password): ?User {
+        if (password_verify($password, $this->password)) {
+            return $this;
+        } else {
+            return null;
+        }
+    }
 }
