@@ -13,6 +13,12 @@
 |
 */
 
-$router->post('/login', [
+$router->get('/login', [
     'uses' => 'LoginController@login'
 ]);
+
+$router->group(['middleware' => 'auth'], function () use ($router) {
+    $router->get('/test', function () {
+        return 'logged in';
+    });
+});
