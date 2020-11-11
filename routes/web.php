@@ -14,7 +14,11 @@
 */
 
 $router->get('/login', [
-    'uses' => 'LoginController@login'
+    'uses' => 'AccountController@login'
+]);
+
+$router->get('/signup', [
+    'uses' => 'AccountController@signup'
 ]);
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
