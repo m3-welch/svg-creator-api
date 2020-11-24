@@ -50,8 +50,8 @@ class AccountProvider
         if ($validator->fails()) {
             return new JsonResponse([
                 "message" => $validator->errors()->all(),
-                "status" => 500
-            ], 500);
+                "status" => 400
+            ], 400);
         }
 
         $user = User::create([
