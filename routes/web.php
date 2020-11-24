@@ -17,7 +17,7 @@ $router->get('/login', [
     'uses' => 'AccountController@login'
 ]);
 
-$router->get('/signup', [
+$router->post('/signup', [
     'uses' => 'AccountController@signup'
 ]);
 
