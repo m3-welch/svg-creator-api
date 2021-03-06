@@ -25,4 +25,16 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->get('/test', function () {
         return 'logged in';
     });
+
+    $router->post('/cloud/save', [
+        'uses' => 'CloudController@save'
+    ]);
+
+    $router->post('/cloud/load', [
+        'uses' => 'CloudController@load'
+    ]);
+
+    $router->post('/cloud/list', [
+        'uses' => 'CloudController@getListOfSavedFiles'
+    ]);
 });

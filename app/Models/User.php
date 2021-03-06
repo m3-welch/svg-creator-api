@@ -19,7 +19,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'email'
+        'id',
+        'username',
+        'password',
+        'token',
+        'email',
     ];
 
     protected $table = 'users';
@@ -40,5 +44,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         } else {
             return null;
         }
+    }
+
+    public function getUserFromToken(string $token): ?User {
+        $user = User::where('token', $token)->first();
+
+        return $user;
     }
 }
